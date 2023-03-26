@@ -1,4 +1,4 @@
-name: mathlogic-test
+name: Mathlogic Test
 on:
   push:
     branch:
