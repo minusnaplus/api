@@ -1,5 +1,10 @@
 # MINUS NA PLUS API
 http://minus-na-plus.nabank.tech
+http://minus-na-plus.nabank.tech/swagger
+
+![example workflow](https://github.com/minusnaplus/api/actions/workflows/golangci-lint.yml/badge.svg)
+![example workflow](https://github.com/minusnaplus/api/actions/workflows/mathlogic-test.yml/badge.svg)
+![example workflow](https://github.com/minusnaplus/api/actions/workflows/sec-scan.yml/badge.svg)
 
 # Create a Hetzner snapshot using Packer - provisioning using Ansible
 
