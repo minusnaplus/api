@@ -1,0 +1,31 @@
+---
+# roles/example/tasks/main.yml
+#- name: Install the correct web server for RHEL
+#  import_tasks: redhat.yml
+#  when: ansible_facts['os_family']|lower == 'redhat'
+#
+#- name: Install the correct web server for Debian
+#  import_tasks: debian.yml
+#  when: ansible_facts['os_family']|lower == 'debian'
+#
+## roles/example/tasks/redhat.yml
+#- name: Install web server
+#  ansible.builtin.yum:
+#    name: "httpd"
+#    state: present
+
+# roles/example/tasks/debian.yml
+#- name: Install web server
+#  ansible.builtin.apt:
+#    name: "htop"
+#    state: present
+- name: Molecule Hello World!
+  debug:
+    msg: Hello, World!
+
+- name: Install web server
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ my_packages }}"

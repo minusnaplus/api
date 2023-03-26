@@ -1,0 +1,19 @@
+---
+- name: Set timezone to Etc/UTC
+  timezone:
+    name: Etc/UTC
+
+# Install Packages
+- name: Update apt
+  apt: update_cache=yes
+
+- name: Install required system packages
+  apt: name={{ item }} state=latest update_cache=yes force_apt_get=yes
+  loop: [ 'curl', 'vim', 'ufw', 'git', 'certbot']
+
+- name: Update system
+  package:
+    name: "*"
+    update_cache: yes
+    state: latest
+  register: system_updated

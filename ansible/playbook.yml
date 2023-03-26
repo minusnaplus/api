@@ -1,0 +1,5 @@
+# init
+- name: First
+  hosts: fleet
+  roles:
+    - ./roles/tutor

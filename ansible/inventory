@@ -1,0 +1,8 @@
+[local]
+localhost ansible_connection=local
+
+[fleet:children]
+naplus
+
+[naplus]
+plus_minus.nabank.tech ansible_connection=ssh ansible_ssh_user=naplus ansible_ssh_port=39339

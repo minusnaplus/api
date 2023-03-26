@@ -1,0 +1,43 @@
+---
+# Sudo Group Setup
+# - name: Make sure we have a 'wheel' group
+#   group:
+#     name: wheel
+#     state: present
+
+# - name: Allow 'wheel' group to have passwordless sudo
+#   lineinfile:
+#     path: /etc/sudoers
+#     state: present
+#     regexp: '^%wheel'
+#     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+#     validate: '/usr/sbin/visudo -cf %s'
+    
+- name: Create a new user
+  user:
+    name: "{{ deploy_user_name }}"
+    state: present
+    groups: adm,www-data,docker
+    append: true
+    create_home: true
+    shell: /bin/bash
+        
+- name: Set authorized key for remote user
+  authorized_key:
+    user: "{{ deploy_user_name }}"
+    state: present
+    key: "{{ lookup('file', deploy_user_key_path ) }}"
+
+- name: Set authorized key for root
+  authorized_key:
+    user: "root"
+    state: present
+    key: "{{ lookup('file', deploy_user_key_path ) }}"
+      
+- name: Disable password login
+  lineinfile: 
+    path: /etc/ssh/sshd_config 
+    regexp: '^(#\s*)?PasswordAuthentication '
+    line: 'PasswordAuthentication no'
+  notify: Restart sshd
+  
