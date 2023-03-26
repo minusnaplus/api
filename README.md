@@ -1,5 +1,5 @@
 # MINUS NA PLUS API
-https://plus_minus.nabank.tech
+http://minus-na-plus.nabank.tech
 
 # Create a Hetzner snapshot using Packer - provisioning using Ansible
 
