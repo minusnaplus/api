@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  rutynka-web:
+      volumes:
+        - ./config/ssl_cert/prd:/ssl
+      restart: always
+      ports:
+          - "443:443"
+          - "80:80"
+  erdos-node:
+    build:
+      context: ./config/dockerfiles/node
+      target: production
+    env_file: ./config/dockerfiles/node/.env.prd
+  erdos-fiber:
+    build:
+      context: ./config/dockerfiles/fiber
+      target: production
