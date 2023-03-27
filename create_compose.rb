@@ -1,29 +1,47 @@
 require 'erb'
+require 'optparse'
 
-# Define the variables that will be used in the ERB template
-containers = [
-  {
-    name: "container1",
-    image: "image1",
-    env: { VAR1: "value1", VAR2: "value2" },
-    ports: ["8000:80", "8443:443"]
-  },
-  {
-    name: "container2",
-    image: "image2",
-    env: { VAR3: "value3", VAR4: "value4" },
-    ports: ["9000:80", "9443:443"]
-  }
-]
+# Define default variable values
+defaults = {
+  image_name: 'nginx',
+  image_tag_1: 'proxy',
+  image_tag_2: 'fastify',
+  image_tag_3: 'fiber',
+  environment: 'production',
+  database_host: 'db',
+  memory_limit: '512M'
+}
 
-# Load the ERB template from file
-template = File.read('docker-compose.yml.erb')
+OptionParser.new do |opts|
+  opts.banner = 'Usage: generate-docker-compose.rb [options]'
 
-# Create a new ERB object based on the template
-renderer = ERB.new(template)
+  opts.on('-n', '--name NAME', 'Docker image name') do |name|
+    defaults[:image_name] = name
+  end
 
-# Render the ERB template with the given variables
-result = renderer.result(binding)
+  opts.on('-t', '--tag TAG', 'Docker image tag') do |tag|
+    defaults[:image_tag] = tag
+  end
 
-# Output the result to STDOUT
+  opts.on('-e', '--environment ENV', 'Application environment') do |env|
+    defaults[:environment] = env
+  end
+
+  opts.on('-d', '--database HOST', 'Database host') do |host|
+    defaults[:database_host] = host
+  end
+
+  opts.on('-m', '--memory LIMIT', 'Container memory limit') do |limit|
+    defaults[:memory_limit] = limit
+  end
+end.parse!
+
+template_path = File.join(__dir__, 'compose.yml.erb')
+
+template = File.read(template_path)
+variables = defaults
+context = binding
+
+result = ERB.new(template).result(context)
+
 puts result

@@ -1,17 +1,25 @@
-version: '3.7'
+version: '3.9'
 
 services:
-  rutynka-web:
+  erdos-proxy:
+      build: ./_devops/nginx
+      image: marcin0/minus-na-plus:proxy
       volumes:
         - ./_devops/config/ssl_cert/prd:/ssl
       restart: always
       ports:
           - "443:443"
           - "80:80"
-  erdos-node:
+  erdos-fastify:
     build:
-      context: ./_devops/dockerfiles/node
+      context: ./_devops/fastify
       target: production
-    env_file: ./_devops/node/.env.prd
+    env_file: _devops/fastify/.env.prd
+    environment:
+      APP_ENV: prod
   erdos-fiber:
+    build:
+      context: ./_devops/fiber
       target: production
+    environment:
+      APP_ENV: prod
