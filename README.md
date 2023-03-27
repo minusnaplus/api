@@ -57,10 +57,20 @@ curl http://minus-na-plus.nabank.tech/v1/api/healthy
 ####  Interested? You can find more information about the API on [SWAGGER DOC](http://minus-na-plus.nabank.tech/swagger).
 
 ## Usage of Docker Compose Template
-ruby create_compose.rb
+This repository contains templates for generating Docker Compose files for different services. These templates are written in Ruby's Embedded Ruby (ERB) syntax, allowing you to easily customize the Compose file by changing the variables in the templates.
+
+### How to Use
+* Modify the default variables in the create_compose.rb script to your desired values.
+* Run the create_compose.rb script to generate the Docker Compose file with the specified variables.
+* Use the generated Compose file to start up your Dockerized services.
+
 
 ```bash
-❯ ruby create_compose.rb --name1 my-app --tag1 v1.0
+ruby create_compose.rb > compose.yaml
+```
+
+```bash
+❯ ruby create_compose.rb --name1 my-app --tag1 v1.0 > compose.yaml
 version: '3'
 
 services:

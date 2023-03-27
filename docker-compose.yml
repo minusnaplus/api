@@ -14,6 +14,7 @@ services:
           - ./nginx-log:/var/log/nginx
           - ./_devops/config/ssl_cert/prd:/ssl
           - ./front_app:/var/www/vhosts/front_app/
+          - apps-data:/var/www
       links:
           - erdos-fiber
           - erdos-fastify
@@ -29,6 +30,7 @@ services:
       env_file: _devops/fastify/.env
       volumes:
         - ./fastify_api:/home/node/src/app
+        - apps-data:/home
       container_name: erdos-fastify
       restart: always
   erdos-fiber:
@@ -38,6 +40,10 @@ services:
         target: dev
       volumes:
         - ./fiber_api:/usr/src
+        - apps-data:/usr
       container_name: erdos-fiber
       restart: always
+volumes:
+  apps-data:
+    driver: local
 
