@@ -1,10 +1,14 @@
 # MINUS NA PLUS API
-[HOME PAGE](http://minus-na-plus.nabank.tech)
+* [HOME PAGE](http://minus-na-plus.nabank.tech)
+http://minus-na-plus.nabank.tech
+
+* [SWAGGER DOC](http://minus-na-plus.nabank.tech/swagger)
 
 ![example workflow](https://github.com/minusnaplus/api/actions/workflows/sec-scan.yml/badge.svg)
 ![example workflow](https://github.com/minusnaplus/api/actions/workflows/golangci-lint.yml/badge.svg)
 ![example workflow](https://github.com/minusnaplus/api/actions/workflows/mathlogic-test.yml/badge.svg)
 ![example workflow](https://github.com/minusnaplus/api/actions/workflows/publish.yml/badge.svg)
+![example workflow](https://github.com/minusnaplus/api/actions/workflows/matrix-ci.yml/badge.svg)
 
 
 # Create a Hetzner snapshot using Packer - provisioning using Ansible
@@ -29,7 +33,7 @@ packer build packer.json
 ## API
 This is a simple API with mathematical operations designed to test Fiber(go) & Node pipelines. Additionally, it serves as a proof of concept for testing the performance of the Node Fastify vs Golang Fiber framework.
 
-![Alt text](diagram.drawio.png "network diagram")
+![Alt text](diagram.drawio.png "api net diagram")
 ### Localhost API Requests
 ```bash
 curl http://erdos.localhost/v1/healthy
@@ -50,12 +54,12 @@ curl http://minus-na-plus.nabank.tech/v1/api/healthy
 * Returns the mathematical constant e.
 * /e ``` GET: curl --cookie "access_token=leaked-key-123" "http://minus-na-plus.nabank.tech/v1/api/e" ```
 
-####  Interested? You can find more information about the API on SWAGGER.
+####  Interested? You can find more information about the API on [SWAGGER DOC](http://minus-na-plus.nabank.tech/swagger).
 
 ## Usage Docker Compose Template
 ${REGISTRY_HOST}
 
-ruby create-compose.rb --name my-app --tag v1.0 > docker.compose.tst
+ruby create-compose.rb --name my-app --tag v1.0
 
 
 [![Alt text](front_test_app_screen.png "Some fun front edt test")](http://minus-na-plus.nabank.tech)
