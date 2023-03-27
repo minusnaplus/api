@@ -7,27 +7,29 @@ services:
       depends_on:
         erdos-fiber:
           condition: service_started
+        erdos-fastify:
+          condition: service_started
       volumes:
           - ./_devops/config/local.conf:/etc/nginx/conf.d/site.conf
           - ./nginx-log:/var/log/nginx
-          - ./_devops/config/ssl_cert/local:/ssl
+          - ./_devops/config/ssl_cert/prd:/ssl
           - ./front_app:/var/www/vhosts/front_app/
       links:
           - erdos-fiber
-          - erdos-node
+          - erdos-fastify
       container_name: erdos-proxy
       ports:
         - "80:80"
       restart: always
-  erdos-node:
-      image: marcin0/minus-na-plus:node
+  erdos-fastify:
+      image: marcin0/minus-na-plus:fastify
       build:
-        context: ./_devops/node
+        context: _devops/fastify
         target: dev
-      env_file: ./_devops/node/.env
+      env_file: _devops/fastify/.env
       volumes:
         - ./fastify_api:/home/node/src/app
-      container_name: erdos-node
+      container_name: erdos-fastify
       restart: always
   erdos-fiber:
       image: marcin0/minus-na-plus:fiber

@@ -12,7 +12,7 @@ jobs:
         with:
           version: '2.14.2'
       - name: Build image
-        run: docker-compose build
+        run: docker-compose -f docker-compose.prd.yml build
       - name: Login docker HUB
         uses: docker/login-action@v2
         with:

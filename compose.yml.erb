@@ -1,0 +1,53 @@
+version: '3'
+
+# services:
+#   web:
+#     image: <%= @image_name %>:<%= @image_tag %>
+#     # Ports to forward
+#     ports:
+#       - "80:80"
+#     resources:
+#       limits:
+#         memory: <%= @memory_limit %>
+#     # Environment variables
+#     environment:
+#       - ENVIRONMENT=<%= @environment %>
+#       - DATABASE_HOST=<%= @database_host %>
+services:
+  erdos-proxy:
+      build: ./_devops/nginx
+      image: <%= @image_name %>:<%= @image_tag_1 %>
+      depends_on:
+        erdos-fiber:
+          condition: service_started
+      volumes:
+          - ./_devops/config/local.conf:/etc/nginx/conf.d/site.conf
+          - ./nginx-log:/var/log/nginx
+          - ./_devops/config/ssl_cert/local:/ssl
+          - ./front_app:/var/www/vhosts/front_app/
+      links:
+          - erdos-fiber
+          - erdos-node
+      container_name: erdos-proxy
+      ports:
+        - "80:80"
+      restart: always
+  erdos-node:
+      image: <%= @image_name %>:<%= @image_tag_2 %>
+      build:
+        context: ./_devops/node
+        target: dev
+      env_file: ./_devops/node/.env
+      volumes:
+        - ./fastify_api:/home/node/src/app
+      container_name: erdos-node
+      restart: always
+  erdos-fiber:
+      image: <%= @image_name %>:<%= @image_tag_3 %>
+      build:
+        context: ./_devops/fiber
+        target: dev
+      volumes:
+        - ./fiber_api:/usr/src
+      container_name: erdos-fiber
+      restart: always

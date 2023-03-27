@@ -1,4 +1,4 @@
-# Here we are getting our node as Base image
+# Here we are getting our fastify as Base image
 # https://github.com/afteracademy/nodejs-backend-architecture-typescript
 # https://github.com/geshan/express-app/blob/main/Dockerfile - better!
 FROM node:18-alpine3.17 as base
@@ -16,11 +16,11 @@ RUN mkdir -p /home/node/src/node_modules && chown -R node:node /home/node/src/no
 # setting working directory in the container
 WORKDIR /home/node/src
 
-# grant permission of node project directory to node user
+# grant permission of fastify project directory to fastify user
 COPY --chown=node:node . .
-#COPY package.json yarn.lock /home/node/src/
+#COPY package.json yarn.lock /home/fastify/src/
 COPY package.json /home/node/src/
-EXPOSE 3003
+EXPOSE 3001
 
 
 FROM base as production
