@@ -11,6 +11,7 @@ services:
           - "443:443"
           - "80:80"
   erdos-fastify:
+    image: marcin0/minus-na-plus:fastify
     build:
       context: ./_devops/fastify
       target: production
@@ -18,6 +19,7 @@ services:
     environment:
       APP_ENV: prod
   erdos-fiber:
+    image: marcin0/minus-na-plus:fiber
     build:
       context: ./_devops/fiber
       target: production
