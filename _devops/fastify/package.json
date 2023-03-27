@@ -1,6 +1,6 @@
 {
   "name": "fastify-api",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Simple api",
   "type": "module",
   "main": "app.js",
