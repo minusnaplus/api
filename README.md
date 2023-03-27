@@ -31,7 +31,7 @@ packer build packer.json
 
 ```
 ## API
-This is a simple API with mathematical operations designed to test Fiber(go) & Node pipelines. Additionally, it serves as a proof of concept for testing the performance of the Node Fastify vs Golang Fiber framework.
+This is a simple API with mathematical operations designed to test Fiber(go) & Node with Github actions. Additionally, it serves as a proof of concept for testing the performance of the Node Fastify vs Golang Fiber framework.
 
 ![Alt text](diagram.drawio.png "api net diagram")
 ### Localhost API Requests
@@ -56,10 +56,55 @@ curl http://minus-na-plus.nabank.tech/v1/api/healthy
 
 ####  Interested? You can find more information about the API on [SWAGGER DOC](http://minus-na-plus.nabank.tech/swagger).
 
-## Usage Docker Compose Template
-${REGISTRY_HOST}
+## Usage of Docker Compose Template
+ruby create_compose.rb
 
-ruby create-compose.rb --name my-app --tag v1.0
+```bash
+❯ ruby create_compose.rb --name1 my-app --tag1 v1.0
+version: '3'
+
+services:
+  erdos-proxy:
+      build: ./_devops/nginx
+      image: my-app:v1.0
+      depends_on:
+        erdos-fiber:
+          condition: service_started
+      volumes:
+          - ./_devops/config/local.conf:/etc/nginx/conf.d/site.conf
+          - ./nginx-log:/var/log/nginx
+          - ./_devops/config/ssl_cert/local:/ssl
+          - ./front_app:/var/www/vhosts/front_app/
+      links:
+          - erdos-fiber
+          - erdos-node
+      container_name: erdos-proxy
+      ports:
+        - "80:80"
+      restart: always
+  erdos-fastify:
+      image: marcin0/minus-na-plus:fastify
+      build:
+        context: ./_devops/node
+        target: dev
+      env_file: ./_devops/node/.env
+      volumes:
+        - ./fastify_api:/home/node/src/app
+      container_name: erdos-node
+      restart: always
+  erdos-fiber:
+      image: marcin0/minus-na-plus:fiber
+      build:
+        context: ./_devops/fiber
+        target: dev
+      volumes:
+        - ./fiber_api:/usr/src
+      container_name: erdos-fiber
+      restart: always
+
+
+```
+
 
 
 [![Alt text](front_test_app_screen.png "Some fun front edt test")](http://minus-na-plus.nabank.tech)
