@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const fs = require('fs');
 const fastify = require('fastify')({
     logger: true
 })

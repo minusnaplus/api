@@ -2,7 +2,6 @@
   "name": "fastify-api",
   "version": "0.1.9",
   "description": "Simple api",
-  "type": "module",
   "main": "app.js",
   "scripts": {
     "start": "node /home/node/src/app/api.js"

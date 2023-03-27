@@ -5,6 +5,8 @@ services:
       build: ./_devops/nginx
       image: marcin0/minus-na-plus:proxy
       volumes:
+        - apps-data:/var/www
+        - apps-data:/var/etc
         - ./_devops/config/ssl_cert/prd:/ssl
       restart: always
       ports:
@@ -12,6 +14,8 @@ services:
           - "80:80"
   erdos-fastify:
     image: marcin0/minus-na-plus:fastify
+    volumes:
+      - apps-data:/home
     build:
       context: ./_devops/fastify
       target: production
@@ -20,8 +24,13 @@ services:
       APP_ENV: prod
   erdos-fiber:
     image: marcin0/minus-na-plus:fiber
+    volumes:
+      - apps-data:/usr/src
     build:
       context: ./_devops/fiber
       target: production
     environment:
       APP_ENV: prod
+volumes:
+  apps-data:
+    driver: local
