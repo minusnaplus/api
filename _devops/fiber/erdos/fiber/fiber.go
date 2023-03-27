@@ -18,7 +18,7 @@ import (
 
 var (
 	apiKey = "leaked-key-123"
-	// curl --cookie "access_token=leaked-key-123" http://localhost:3001/hello
+	// curl --cookie "access_token=leaked-key-123" http://erdos.localhos/v1/api/hello
     // curl --cookie "access_token=leaked-key-123" http://erdos.localhost/v1/api/add/?x=100&y=999
 )
 
@@ -74,8 +74,8 @@ func main() {
 
 	keys := addSecuredKeys()
 
-	app.Get("/v1", func(c *fiber.Ctx) error {
-		return c.SendString("Hello without api-key!" + keys[0])
+	app.Get("/v1/api/hello", func(c *fiber.Ctx) error {
+		return c.SendString("Hello fiber without api-key!" + keys[0])
 	})
 
 	app.Use(keyauth.New(keyauth.Config{
@@ -83,9 +83,9 @@ func main() {
 		Validator: validateAPIKey,
 	}))
 
-	app.Get("/v1/hello", func(c *fiber.Ctx) error {
-		data := map[string]string{"hello": "api"}
-		return c.JSON(data)
+	app.Get("/v1/api/healthy", func(c *fiber.Ctx) error {
+		resp := apiresponse.CreateApiResponse(true, "healthy", "fiber node")
+		return c.JSON(resp)
 	})
 
 	app.Get("/v1/api/add/", func(c *fiber.Ctx) error {

@@ -13,7 +13,7 @@ The snapshot can then be used to quickly stand a cluster using Terraform
 
 You can customize the Ansible playbook to do more customisations.
 
-## Usage
+## Usage IaC
 * Install [Packer](https://www.packer.io/docs/install) and [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 * Get an API token from Hetzner Cloud
 * Set Hetzner token environment variable `export HCLOUD_TOKEN=xxx`
@@ -50,7 +50,13 @@ curl http://minus-na-plus.nabank.tech/v1/api/healthy
 * Returns the mathematical constant e.
 * /e ``` GET: curl --cookie "access_token=leaked-key-123" "http://minus-na-plus.nabank.tech/v1/api/e" ```
 
-####  Interested? You can find more information about the API on SWAGGER. 
+####  Interested? You can find more information about the API on SWAGGER.
+
+## Usage Docker Compose Template
+${REGISTRY_HOST}
+
+ruby create-compose.rb --name my-app --tag v1.0 > docker.compose.tst
+
 
 [![Alt text](front_test_app_screen.png "Some fun front edt test")](http://minus-na-plus.nabank.tech)
 
