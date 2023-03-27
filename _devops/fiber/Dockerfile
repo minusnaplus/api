@@ -1,4 +1,4 @@
-# Here we are getting our node as Base image
+# Here we are getting our fastify as Base image
 # https://github.com/afteracademy/nodejs-backend-architecture-typescript
 # https://github.com/geshan/express-app/blob/main/Dockerfile - better!
 # https://github.com/gravityblast/fresh
