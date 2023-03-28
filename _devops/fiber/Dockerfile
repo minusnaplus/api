@@ -14,12 +14,12 @@ RUN go mod download
 #RUN go mod verify
 EXPOSE 3001
 # Build the Go app
-RUN CGO_ENABLED=0 go build -ldflags '-extldflags "-static"' -o fiber.bin fiber/fiber.go
+RUN CGO_ENABLED=0 go build -ldflags '-extldflags "-static"' -o main.bin fiber/main.go
 
 #ENV NODE_ENV=production
 FROM scratch as production
-COPY --from=base /usr/app/fiber.bin /fiber.bin
-ENTRYPOINT ["/fiber.bin"]
+COPY --from=base /usr/app/main.bin /main.bin
+ENTRYPOINT ["./main.bin"]
 
 
 FROM base as dev

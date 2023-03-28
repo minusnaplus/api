@@ -1,1 +1,3 @@
 #for local go dev do not commit
+nginx-log/*
+.idea/*
