@@ -17,9 +17,9 @@ import (
 )
 
 var (
-	apiKey = "leaked-key-123"
-	// curl --cookie "access_token=leaked-key-123" http://erdos.localhos/v1/api/hello
-    // curl --cookie "access_token=leaked-key-123" http://erdos.localhost/v1/api/add/?x=100&y=999
+	apiKey = "public-key-123"
+	// curl --cookie "token=public-key-123" http://erdos.localhos/v1/api/hello
+    // curl --cookie "token=public-key-123" http://erdos.localhost/v1/api/add/?x=100&y=999
 )
 
 var (
@@ -79,7 +79,7 @@ func main() {
 	})
 
 	app.Use(keyauth.New(keyauth.Config{
-		KeyLookup: "cookie:access_token",
+		KeyLookup: "cookie:token",
 		Validator: validateAPIKey,
 	}))
 

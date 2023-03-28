@@ -44,15 +44,15 @@ curl http://minus-na-plus.nabank.tech/v1/api/healthy
 ```
 ### Secure API Requests
 * Adds two numbers together.
-* /add ``` GET: curl --cookie "access_token=leaked-key-123" "http://minus-na-plus.nabank.tech/v1/api/add?x=0&y=1" ```
+* /add ``` GET: curl --cookie "token=public-key-123" "http://minus-na-plus.nabank.tech/v1/api/add?x=0&y=1" ```
 *  Subtracts the second number from the first.
-* /sub ``` GET: curl --cookie "access_token=leaked-key-123" "http://minus-na-plus.nabank.tech/v1/api/sub?x=4&y=2" ```
+* /sub ``` GET: curl --cookie "token=public-key-123" "http://minus-na-plus.nabank.tech/v1/api/sub?x=4&y=2" ```
 *  Multiplies two numbers together.
-* /mul ``` GET: curl --cookie "access_token=leaked-key-123" "http://minus-na-plus.nabank.tech/v1/api/mul?x=5&y=3" ```
+* /mul ``` GET: curl --cookie "token=public-key-123" "http://minus-na-plus.nabank.tech/v1/api/mul?x=5&y=3" ```
 * Multiplies two numbers together.
-* /div ``` GET: curl --cookie "access_token=leaked-key-123" "http://minus-na-plus.nabank.tech/v1/api/div?x=10&y=2" ```
+* /div ``` GET: curl --cookie "token=public-key-123" "http://minus-na-plus.nabank.tech/v1/api/div?x=10&y=2" ```
 * Returns the mathematical constant e.
-* /e ``` GET: curl --cookie "access_token=leaked-key-123" "http://minus-na-plus.nabank.tech/v1/api/e" ```
+* /e ``` GET: curl --cookie "token=public-key-123" "http://minus-na-plus.nabank.tech/v1/api/e" ```
 
 ####  Interested? You can find more information about the API on [SWAGGER DOC](http://minus-na-plus.nabank.tech/swagger).
 

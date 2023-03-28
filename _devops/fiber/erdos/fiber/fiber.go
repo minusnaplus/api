@@ -17,9 +17,9 @@ import (
 )
 
 var (
-	apiKey = "leaked-key-123"
-	// curl --cookie "access_token=leaked-key-123" http://erdos.localhos/v1/api/hello
-    // curl --cookie "access_token=leaked-key-123" http://erdos.localhost/v1/api/add/?x=100&y=999
+	apiKey = "public-key-123"
+	// curl --cookie "token=public-key-123" http://erdos.localhos/v1/api/hello
+    // curl --cookie "token=public-key-123" http://erdos.localhost/v1/api/add/?x=100&y=999
 )
 
 var (
@@ -29,8 +29,9 @@ var (
 )
 
 func addSecuredKeys() []string {
-	keys := os.Getenv("SECKEYSTEST")
-	return strings.Split(keys, ":")
+	key := os.Getenv("SECRET_API_KEY")
+// 	return strings.Split(keys, ":")
+    return key
 }
 
 func parseInt64(str string) (int64, error) {
@@ -79,7 +80,7 @@ func main() {
 	})
 
 	app.Use(keyauth.New(keyauth.Config{
-		KeyLookup: "cookie:access_token",
+		KeyLookup: "cookie:token",
 		Validator: validateAPIKey,
 	}))
 
