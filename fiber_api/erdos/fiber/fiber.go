@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"os"
 	"math"
-	"strings"
+// 	"strings"
     "strconv"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/keyauth/v2"
@@ -18,7 +18,7 @@ import (
 
 var (
 	apiKey = "public-key-123"
-	// curl --cookie "token=public-key-123" http://erdos.localhos/v1/api/hello
+	// curl --cookie "token=public-key-123" http://erdos.localhost/v1/api/hello
     // curl --cookie "token=public-key-123" http://erdos.localhost/v1/api/add/?x=100&y=999
 )
 
@@ -28,9 +28,10 @@ var (
 	ErrorLogger   *log.Logger
 )
 
-func addSecuredKeys() []string {
-	keys := os.Getenv("SECKEYSTEST")
-	return strings.Split(keys, ":")
+func addSecuredKeys() string {
+	key := os.Getenv("SECRET_API_KEY")
+// 	return strings.Split(keys, ":")
+    return key
 }
 
 func parseInt64(str string) (int64, error) {
@@ -75,7 +76,7 @@ func main() {
 	keys := addSecuredKeys()
 
 	app.Get("/v1/api/hello", func(c *fiber.Ctx) error {
-		return c.SendString("Hello fiber without api-key!" + keys[0])
+		return c.SendString("Hello fiber without api-key!" + keys)
 	})
 
 	app.Use(keyauth.New(keyauth.Config{

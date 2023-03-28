@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"os"
 	"math"
-	"strings"
+// 	"strings"
     "strconv"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/keyauth/v2"
@@ -28,7 +28,7 @@ var (
 	ErrorLogger   *log.Logger
 )
 
-func addSecuredKeys() []string {
+func addSecuredKeys() string {
 	key := os.Getenv("SECRET_API_KEY")
 // 	return strings.Split(keys, ":")
     return key
@@ -76,7 +76,7 @@ func main() {
 	keys := addSecuredKeys()
 
 	app.Get("/v1/api/hello", func(c *fiber.Ctx) error {
-		return c.SendString("Hello fiber without api-key!" + keys[0])
+		return c.SendString("Hello fiber without api-key!" + keys)
 	})
 
 	app.Use(keyauth.New(keyauth.Config{
