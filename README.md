@@ -1,8 +1,8 @@
 # MINUS NA PLUS API
-* [HOME PAGE](http://minus-na-plus.nabank.tech)
-http://minus-na-plus.nabank.tech
+* [HOME PAGE](https://minus-na-plus.nabank.tech)
+https://minus-na-plus.nabank.tech
 
-* [SWAGGER DOC](http://minus-na-plus.nabank.tech/swagger)
+* [SWAGGER DOC](https://minus-na-plus.nabank.tech/swagger)
 
 ![example workflow](https://github.com/minusnaplus/api/actions/workflows/sec-scan.yml/badge.svg)
 ![example workflow](https://github.com/minusnaplus/api/actions/workflows/golangci-lint.yml/badge.svg)
@@ -36,25 +36,25 @@ This is a simple API with mathematical operations designed to test Fiber(go) & N
 ![Alt text](diagram.drawio.png "api net diagram")
 ### Localhost API Requests
 ```bash
-curl http://erdos.localhost/v1/healthy
+curl http://erdos.localhost/v1/api/hello
 ```
 ### Public API Requests
 ```bash
-curl http://minus-na-plus.nabank.tech/v1/api/healthy
+curl https://minus-na-plus.nabank.tech/v1/api/hello
 ```
 ### Secure API Requests
 * Adds two numbers together.
-* /add ``` GET: curl --cookie "token=public-key-123" "http://minus-na-plus.nabank.tech/v1/api/add?x=0&y=1" ```
+* /add ``` GET: curl --cookie "token=public-key-123" "https://minus-na-plus.nabank.tech/v1/api/add?x=0&y=1" ```
 *  Subtracts the second number from the first.
-* /sub ``` GET: curl --cookie "token=public-key-123" "http://minus-na-plus.nabank.tech/v1/api/sub?x=4&y=2" ```
+* /sub ``` GET: curl --cookie "token=public-key-123" "https://minus-na-plus.nabank.tech/v1/api/sub?x=4&y=2" ```
 *  Multiplies two numbers together.
-* /mul ``` GET: curl --cookie "token=public-key-123" "http://minus-na-plus.nabank.tech/v1/api/mul?x=5&y=3" ```
+* /mul ``` GET: curl --cookie "token=public-key-123" "https://minus-na-plus.nabank.tech/v1/api/mul?x=5&y=3" ```
 * Multiplies two numbers together.
-* /div ``` GET: curl --cookie "token=public-key-123" "http://minus-na-plus.nabank.tech/v1/api/div?x=10&y=2" ```
+* /div ``` GET: curl --cookie "token=public-key-123" "https://minus-na-plus.nabank.tech/v1/api/div?x=10&y=2" ```
 * Returns the mathematical constant e.
-* /e ``` GET: curl --cookie "token=public-key-123" "http://minus-na-plus.nabank.tech/v1/api/e" ```
+* /e ``` GET: curl --cookie "token=public-key-123" "https://minus-na-plus.nabank.tech/v1/api/e" ```
 
-####  Interested? You can find more information about the API on [SWAGGER DOC](http://minus-na-plus.nabank.tech/swagger).
+####  Interested? You can find more information about the API on [SWAGGER DOC](https://minus-na-plus.nabank.tech/swagger).
 
 ## Usage of Docker Compose Template
 This repository contains templates for generating Docker Compose files for different services. These templates are written in Ruby's Embedded Ruby (ERB) syntax, allowing you to easily customize the Compose file by changing the variables in the templates.
@@ -117,7 +117,7 @@ services:
 
 
 
-[![Alt text](front_test_app_screen.png "Some fun front edt test")](http://minus-na-plus.nabank.tech)
+[![Alt text](front_test_app_screen.png "Some fun front edt test")](https://minus-na-plus.nabank.tech)
 
 
 
