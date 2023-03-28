@@ -13,8 +13,17 @@ fastify.get('/v1/api/healthy', async (request, reply) => {
     reply.code(200).send({ response: 'healthy', success:true, data:'fastify node' })
 })
 
-fastify.get('/v1/api/add', {
+fastify.get('/v1/api/add/', {
     schema: {
+        headers: {
+            type: 'object',
+            properties: {
+                cookie: {
+                    type: 'string',
+                    pattern: '^token=public-key-\\d+$'
+                }
+            }
+        },
         querystring: {
             type: 'object',
             required: ['x', 'y'],
@@ -27,18 +36,119 @@ fastify.get('/v1/api/add', {
             200: {
                 type: 'object',
                 properties: {
-                    result: { type: 'integer' }
+                    success: { type: 'boolean' },
+                    response: { type: 'string' },
+                    data: { type: 'number' }
+                }
+            }
+        }
+    }
+}, async (request, reply) => {
+    const cookieHeader = request.headers['cookie'];
+    if (!cookieHeader || cookieHeader !== 'token=public-key-123') {
+        reply.status(400).send('malformed key fastify ');
+        return;
+    }
+
+    const { x, y } = request.query;
+    const result = x + y;
+    reply.header('Content-Security-Policy',
+        "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self'")
+    return { success: true, response: 'Success fastify', data: result };
+});
+
+
+fastify.get('/v1/api/div/', {
+    schema: {
+        querystring: {
+            type: 'object',
+            required: ['x', 'y'],
+            properties: {
+                x: { type: 'number' },
+                y: { type: 'number' }
+            }
+        },
+        response: {
+            200: {
+                type: 'object',
+                properties: {
+                    success: { type: 'boolean' },
+                    response: { type: 'string' },
+                    data: { type: 'number' }
                 }
             }
         }
     }
 }, async (request, reply) => {
     const { x, y } = request.query;
-    const result = x + y;
+    if (y === 0) {
+        reply.status(400).send({ success: false, response: 'Division by zero is not allowed', data: null });
+        return;
+    }
+    const result = x / y;
     reply.header('Content-Security-Policy',
         "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self'")
-    return { result };
+    return { success: true, response: 'Success fastify', data: result };
 });
+
+fastify.get('/v1/api/mul/', {
+    schema: {
+        querystring: {
+            type: 'object',
+            required: ['x', 'y'],
+            properties: {
+                x: { type: 'number' },
+                y: { type: 'number' }
+            }
+        },
+        response: {
+            200: {
+                type: 'object',
+                properties: {
+                    success: { type: 'boolean' },
+                    response: { type: 'string' },
+                    data: { type: 'number' }
+                }
+            }
+        }
+    }
+}, async (request, reply) => {
+    const { x, y } = request.query;
+    const result = x * y;
+    reply.header('Content-Security-Policy',
+        "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self'")
+    return { success: true, response: 'Success fastify', data: result };
+});
+
+fastify.get('/v1/api/sub/', {
+    schema: {
+        querystring: {
+            type: 'object',
+            required: ['x', 'y'],
+            properties: {
+                x: { type: 'number' },
+                y: { type: 'number' }
+            }
+        },
+        response: {
+            200: {
+                type: 'object',
+                properties: {
+                    success: { type: 'boolean' },
+                    response: { type: 'string' },
+                    data: { type: 'number' }
+                }
+            }
+        }
+    }
+}, async (request, reply) => {
+    const { x, y } = request.query;
+    const result = x - y;
+    reply.header('Content-Security-Policy',
+        "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self'")
+    return { success: true, response: 'Success fastify', data: result };
+});
+
 
 fastify.listen(process.env.PORT || 3001, '::', function (err, address) {
     if (err) {
