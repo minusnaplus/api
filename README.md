@@ -114,7 +114,12 @@ services:
 
 
 ```
-
+### Stress test
+During a single stress test of a load-balanced proxy server lasting 60 seconds, average CPU usage values were obtained for nginx, node (fastify), and go (fiber) in the order of 5.05%, 2.09%, and 0.48%, respectively. These results suggest that, under heavy load, go may consume approximately one-fourth of the resources used by node.
+```bash
+go-wrk -c 500 -d 60 "https://minus-na-plus.nabank.tech/v1/api/mul/?x=7777777777777777777777777777777777777777777777777777777777777777777&y=99999999999999999999999999999999999999999999999999999999999999999999999999999999999"
+```
+![Alt text](average_go-wrk.png "api net diagram")
 
 
 [![Alt text](front_test_app_screen.png "Some fun front edt test")](https://minus-na-plus.nabank.tech)
