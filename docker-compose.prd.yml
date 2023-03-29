@@ -3,7 +3,7 @@ version: '3.9'
 services:
   erdos-proxy:
       build: ./_devops/nginx
-      image: marcin0/minus-na-plus:proxy0.1
+      image: marcin0/minus-na-plus:proxy
       volumes:
         - apps-data:/var/www
         - apps-data:/var/etc
@@ -13,7 +13,7 @@ services:
           - "443:443"
           - "80:80"
   erdos-fastify:
-    image: marcin0/minus-na-plus:fastify0.1
+    image: marcin0/minus-na-plus:fastify
     volumes:
       - apps-data:/home
     build:
@@ -23,7 +23,7 @@ services:
     environment:
       APP_ENV: prod
   erdos-fiber:
-    image: marcin0/minus-na-plus:fiber0.1
+    image: marcin0/minus-na-plus:fiber
     build:
       context: ./_devops/fiber
       target: production
