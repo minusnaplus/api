@@ -44,13 +44,13 @@ curl https://minus-na-plus.nabank.tech/v1/api/hello
 ```
 ### Secure API Requests
 * Adds two numbers together.
-* /add ``` GET: curl --cookie "token=public-key-123" "https://minus-na-plus.nabank.tech/v1/api/add?x=0&y=1" ```
+* /add ``` GET: curl --cookie "token=public-key-123" "https://minus-na-plus.nabank.tech/v1/api/add/?x=0&y=1" ```
 *  Subtracts the second number from the first.
-* /sub ``` GET: curl --cookie "token=public-key-123" "https://minus-na-plus.nabank.tech/v1/api/sub?x=4&y=2" ```
+* /sub ``` GET: curl --cookie "token=public-key-123" "https://minus-na-plus.nabank.tech/v1/api/sub/?x=4&y=2" ```
 *  Multiplies two numbers together.
-* /mul ``` GET: curl --cookie "token=public-key-123" "https://minus-na-plus.nabank.tech/v1/api/mul?x=5&y=3" ```
+* /mul ``` GET: curl --cookie "token=public-key-123" "https://minus-na-plus.nabank.tech/v1/api/mul/?x=5&y=3" ```
 * Multiplies two numbers together.
-* /div ``` GET: curl --cookie "token=public-key-123" "https://minus-na-plus.nabank.tech/v1/api/div?x=10&y=2" ```
+* /div ``` GET: curl --cookie "token=public-key-123" "https://minus-na-plus.nabank.tech/v1/api/div/?x=10&y=2" ```
 * Returns the mathematical constant e.
 * /e ``` GET: curl --cookie "token=public-key-123" "https://minus-na-plus.nabank.tech/v1/api/e" ```
 
