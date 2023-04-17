@@ -109,6 +109,14 @@ fastify.get('/v1/api/mul/', {
                     response: { type: 'string' },
                     data: { type: 'number' }
                 }
+            },
+            400: {
+                type: 'object',
+                properties: {
+                    success: { type: 'boolean' },
+                    response: { type: 'string' },
+                    data: { type: 'null' }
+                }
             }
         }
     }
@@ -117,6 +125,10 @@ fastify.get('/v1/api/mul/', {
     const result = x * y;
     reply.header('Content-Security-Policy',
         "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self'")
+    reply.header('Content-Type', 'application/json')
+    if (reply.statusCode >= 299) {
+        return { success: false, response: 'False fastify', data: null };
+    }
     return { success: true, response: 'Success fastify', data: result };
 });
 
